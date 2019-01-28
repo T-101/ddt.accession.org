@@ -54,6 +54,6 @@ class WallView(FormView):
         return reverse('wall')
 
     def form_valid(self, form):
-        if self.settings.registration_open:
+        if self.settings.wall_open:
             form.save()
         return super().form_valid(form)
