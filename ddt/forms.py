@@ -5,7 +5,13 @@ from snowpenguin.django.recaptcha2.widgets import ReCaptchaWidget
 from ddt.models import Registration, Wall
 
 
-class RegistrationForm(ModelForm):
+class BaseModelForm(ModelForm):
+    def __init__(self, *args, **kwargs):
+        kwargs.setdefault('label_suffix', '')
+        super().__init__(*args, **kwargs)
+
+
+class RegistrationForm(BaseModelForm):
     captcha = ReCaptchaField(widget=ReCaptchaWidget())
 
     class Meta:
@@ -17,7 +23,7 @@ class RegistrationForm(ModelForm):
         }
 
 
-class WallForm(ModelForm):
+class WallForm(BaseModelForm):
     captcha = ReCaptchaField(widget=ReCaptchaWidget())
 
     class Meta:
