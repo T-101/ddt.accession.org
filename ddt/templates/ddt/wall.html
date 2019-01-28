@@ -7,7 +7,7 @@
         {% for writing in writings %}
             <div class="ui form segment">
                 <div class="field">
-                    {{ writing.handle }} wrote at {{ writing.created }}
+                    <strong>{{ writing.handle }} </strong> <i>wrote at</i> {{ writing.created }}
                 </div>
                 <div class="field">
                     {{ writing.text }}
@@ -15,27 +15,34 @@
 
             </div>
         {% endfor %}
-
-        <div class="ui form segment">
-            <form method="post">{% csrf_token %}
-                <div class="field">
+        {% if settings.wall_open %}
+            <div class="ui form segment">
+                <form method="post">{% csrf_token %}
                     <div class="field">
-                        {{ form.handle.label_tag }}
-                        {{ form.handle }}
+                        <div class="field">
+                            {{ form.handle.label_tag }}
+                            {{ form.handle }}
+                        </div>
                     </div>
-                </div>
-                <div class="field">
                     <div class="field">
-                        {{ form.text.label_tag }}
-                        {{ form.text }}
+                        <div class="field">
+                            {{ form.text.label_tag }}
+                            {{ form.text }}
+                        </div>
                     </div>
-                </div>
+                    <div class="field">
+                        {{ form.captcha }}
+                    </div>
+                    <button type="submit" class="ui submit button">Submit</button>
+                </form>
+            </div>
+        {% else %}
+            <div class="ui segment">
                 <div class="field">
-                    {{ form.captcha }}
+                    <h4>Wall writing disabled</h4>
                 </div>
-                <button type="submit" class="ui submit button">Submit</button>
-            </form>
-        </div>
+            </div>
+        {% endif %}
 
     </div>
 {% endblock %}

@@ -1,7 +1,6 @@
 {% extends 'ddt/base.html' %}
 
 {% block content %}
-
     <div class="ui stacked segment">
         <h4>Register to attend funeral</h4>
         <p>
@@ -9,33 +8,41 @@
             up,
             in order to know the size of the chapel and memorial quarters to reserve.
         </p>
-        <div class="ui form segment">
-
-            <form method="post">{% csrf_token %}
-                <div class="two fields">
-                    <div class="field">
-                        {{ form.handle.label_tag }}
-                        {{ form.handle }}
+        {% if settings.registration_open %}
+            <div class="ui form segment">
+                <form method="post">{% csrf_token %}
+                    <div class="two fields">
+                        <div class="field">
+                            {{ form.handle.label_tag }}
+                            {{ form.handle }}
+                        </div>
+                        <div class="field">
+                            {{ form.amount.label_tag }}
+                            {{ form.amount }}
+                        </div>
                     </div>
                     <div class="field">
-                        {{ form.amount.label_tag }}
-                        {{ form.amount }}
+                        <div class="ui">
+                            {{ form.hidden }}
+                            {{ form.hidden.label_tag }}
+                        </div>
                     </div>
-                </div>
-                <div class="field">
-                    <div class="ui">
-                        {{ form.hidden }}
-                        {{ form.hidden.label_tag }}
+                    <div class="field">
+                        {{ form.captcha }}
                     </div>
-                </div>
-                <div class="field">
-                    {{ form.captcha }}
-                </div>
 
-                <button type="submit" class="ui submit button">Submit</button>
-            </form>
+                    <button type="submit" class="ui submit button">Submit</button>
+                </form>
+            </div>
+        {% endif %}
+    </div>
+    {% if not settings.registration_open %}
+    <div class="ui segment">
+        <div class="field">
+            <h4>Registration closed</h4>
         </div>
     </div>
+    {% endif %}
     <div class="ui segment">
         <table class="ui celled striped table unstackable">
             <thead>
