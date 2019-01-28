@@ -19,3 +19,8 @@ class Wall(models.Model):
 
     def __str__(self):
         return self.handle
+
+
+class SiteSettings(models.Model):
+    registration_open = models.BooleanField(default=False)
+    wall_open = models.BooleanField(default=False)
