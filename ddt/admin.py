@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from ddt.models import Registration, Wall
+from ddt.models import Registration, Wall, SiteSettings
 
 
 class RegistrationAdmin(admin.ModelAdmin):
@@ -15,3 +15,10 @@ class WallAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Wall, WallAdmin)
+
+
+class SiteSettingsAdmin(admin.ModelAdmin):
+    list_display = ['pk', 'registration_open', 'wall_open']
+
+
+admin.site.register(SiteSettings, SiteSettingsAdmin)
