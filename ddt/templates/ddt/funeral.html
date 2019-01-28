@@ -22,7 +22,7 @@
                         </div>
                     </div>
                     <div class="field">
-                        <div class="ui">
+                        <div class="ui checkbox">
                             {{ form.hidden }}
                             {{ form.hidden.label_tag }}
                         </div>
@@ -37,11 +37,11 @@
         {% endif %}
     </div>
     {% if not settings.registration_open %}
-    <div class="ui segment">
-        <div class="field">
-            <h4>Registration closed</h4>
+        <div class="ui segment">
+            <div class="field">
+                <h4>Registration closed</h4>
+            </div>
         </div>
-    </div>
     {% endif %}
     <div class="ui segment">
         <table class="ui celled striped table unstackable">
