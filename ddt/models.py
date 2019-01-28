@@ -1,9 +1,12 @@
 from django.db import models
+from django.core.validators import MaxValueValidator, MinValueValidator
 
 
 class Registration(models.Model):
     handle = models.CharField("Name / Handle", max_length=64)
-    amount = models.PositiveIntegerField("People attending, including yourself", default=1)
+    amount = models.IntegerField("People attending, including yourself", default=1, validators=[
+        MinValueValidator(1), MaxValueValidator(10)
+    ])
     hidden = models.BooleanField("Hide name from listing", default=False)
     created = models.DateTimeField(auto_now_add=True)
 
