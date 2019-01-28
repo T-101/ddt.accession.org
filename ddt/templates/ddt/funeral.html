@@ -1,0 +1,70 @@
+{% extends 'ddt/base.html' %}
+
+{% block content %}
+
+    <div class="ui stacked segment">
+        <h4>Register to attend funeral</h4>
+        <p>
+            Register here if you will attend the funeral services. We need to have an idea how many people are showing
+            up,
+            in order to know the size of the chapel and memorial quarters to reserve.
+        </p>
+        <div class="ui form segment">
+
+            <form method="post">{% csrf_token %}
+                <div class="two fields">
+                    <div class="field">
+                        {{ form.handle.label_tag }}
+                        {{ form.handle }}
+                    </div>
+                    <div class="field">
+                        {{ form.amount.label_tag }}
+                        {{ form.amount }}
+                    </div>
+                </div>
+                <div class="field">
+                    <div class="ui">
+                        {{ form.hidden }}
+                        {{ form.hidden.label_tag }}
+                    </div>
+                </div>
+                <div class="field">
+                    {{ form.captcha }}
+                </div>
+
+                <button type="submit" class="ui submit button">Submit</button>
+            </form>
+        </div>
+    </div>
+    <div class="ui segment">
+        <table class="ui celled striped table unstackable">
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>Name / Handle</th>
+                <th>Amount</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for registration in registrations %}
+                <tr>
+                    <td>{{ forloop.counter }}.</td>
+                    <td>
+                        {% if registration.hidden %}
+                            (hidden)
+                        {% else %}
+                            {{ registration.handle }}
+                        {% endif %}
+                    </td>
+                    <td>{{ registration.amount }}</td>
+                </tr>
+            {% endfor %}
+            <tr>
+                <td colspan="3">Total: {{ count }}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    </div>
+{% endblock %}

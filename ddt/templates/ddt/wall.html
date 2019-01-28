@@ -1,0 +1,41 @@
+{% extends 'ddt/base.html' %}
+
+{% block content %}
+    <div class="ui stacked segment">
+        <h4>Wall</h4>
+
+        {% for writing in writings %}
+            <div class="ui form segment">
+                <div class="field">
+                    {{ writing.handle }} wrote at {{ writing.created }}
+                </div>
+                <div class="field">
+                    {{ writing.text }}
+                </div>
+
+            </div>
+        {% endfor %}
+
+        <div class="ui form segment">
+            <form method="post">{% csrf_token %}
+                <div class="field">
+                    <div class="field">
+                        {{ form.handle.label_tag }}
+                        {{ form.handle }}
+                    </div>
+                </div>
+                <div class="field">
+                    <div class="field">
+                        {{ form.text.label_tag }}
+                        {{ form.text }}
+                    </div>
+                </div>
+                <div class="field">
+                    {{ form.captcha }}
+                </div>
+                <button type="submit" class="ui submit button">Submit</button>
+            </form>
+        </div>
+
+    </div>
+{% endblock %}

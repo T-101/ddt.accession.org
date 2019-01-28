@@ -1,0 +1,30 @@
+{% spaceless %}
+    <!DOCTYPE html>{% load static %}{% load recaptcha2 %}
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>RIP DDT</title>
+    </head>
+    <link rel="stylesheet" type="text/css" href="{% static 'ddt/css/semantic.cyborg.min.css' %}">
+    {% recaptcha_init 'en' %}
+    <body>
+
+    <div class="ui container">
+
+        <!-- <div class="ui three item menu"> -->
+        <div class="ui secondary pointing three item demo menu">
+            <a class="{% if request.resolver_match.url_name == "index" %}active{% endif %} item"
+               href="{% url 'index' %}">Home</a>
+            <a class="{% if request.resolver_match.url_name == "funeral" %}active{% endif %} item"
+               href="{% url 'funeral' %}">Funeral registration</a>
+            <a class="{% if request.resolver_match.url_name == "wall" %}active{% endif %} item"
+               href="{% url 'wall' %}">Memorial Wall</a>
+        </div>
+
+        {% block content %}
+        {% endblock %}
+    </div>
+
+    </body>
+    </html>
+{% endspaceless %}
