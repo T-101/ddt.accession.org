@@ -3,4 +3,4 @@
 db.sqlite3
 *.pyc
 static/*
-media/*
+.DS_Store
