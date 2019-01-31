@@ -2,11 +2,11 @@
 
 {% block content %}
     <div class="ui stacked segment">
-        <h4>Register to attend funeral</h4>
+        <h4>Register to attend memorial services</h4>
         <p>
-            Register here if you will attend the funeral services. We need to have an idea how many people are showing
-            up,
-            in order to know the size of the chapel and memorial quarters to reserve.
+            Register here if you will attend the memorial services.
+            We need to have an idea how many people are showing up,
+            in order to know the size of the memorial quarters to reserve.
         </p>
         {% if settings.registration_open %}
             <div class="ui form segment">
@@ -22,7 +22,7 @@
                         </div>
                     </div>
                     <div class="field">
-                        <div class="ui">
+                        <div class="ui checkbox">
                             {{ form.hidden }}
                             {{ form.hidden.label_tag }}
                         </div>
@@ -37,11 +37,11 @@
         {% endif %}
     </div>
     {% if not settings.registration_open %}
-    <div class="ui segment">
-        <div class="field">
-            <h4>Registration closed</h4>
+        <div class="ui segment">
+            <div class="field">
+                <h4>Registration closed</h4>
+            </div>
         </div>
-    </div>
     {% endif %}
     <div class="ui segment">
         <table class="ui celled striped table unstackable">
