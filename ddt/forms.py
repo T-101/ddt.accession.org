@@ -21,6 +21,9 @@ class RegistrationForm(BaseModelForm):
             'handle': TextInput(attrs={'placeholder': 'Name or Handle'}),
             'amount': NumberInput(attrs={'min': 1, 'max': 10, 'placeholder': 'Number between 1-10'})
         }
+        labels = {
+            'handle': "Name or Handle"
+        }
 
 
 class WallForm(BaseModelForm):
