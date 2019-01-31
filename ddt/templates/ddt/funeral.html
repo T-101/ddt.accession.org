@@ -1,6 +1,7 @@
 {% extends 'ddt/base.html' %}
 
 {% block content %}
+    {{ form.errors }}
     <div class="ui stacked segment">
         <h4>Register to attend memorial services</h4>
         <p>
@@ -8,17 +9,44 @@
             We need to have an idea how many people are showing up,
             in order to know the size of the memorial quarters to reserve.
         </p>
+        <p>The funeral is open to all of DDT's friends. Registration will open once a burial date has been set.</p>
         {% if settings.registration_open %}
             <div class="ui form segment">
                 <form method="post">{% csrf_token %}
                     <div class="two fields">
                         <div class="field">
-                            {{ form.handle.label_tag }}
-                            {{ form.handle }}
+                            {% if form.handle.errors %}
+                                <div class="ui form error">
+                                    <div class="field error">
+                                        {{ form.handle.label_tag }}
+                                        {{ form.handle }}
+                                    </div>
+                                    <div class="ui error message">
+                                        <div class="header">Field error</div>
+                                        <p>{{ form.handle.errors }}</p>
+                                    </div>
+                                </div>
+                            {% else %}
+                                {{ form.handle.label_tag }}
+                                {{ form.handle }}
+                            {% endif %}
                         </div>
                         <div class="field">
-                            {{ form.amount.label_tag }}
-                            {{ form.amount }}
+                            {% if form.amount.errors %}
+                                <div class="ui form error">
+                                    <div class="field error">
+                                        {{ form.amount.label_tag }}
+                                        {{ form.amount }}
+                                    </div>
+                                    <div class="ui error message">
+                                        <div class="header">Field error</div>
+                                        <p>{{ form.amount.errors }}</p>
+                                    </div>
+                                </div>
+                            {% else %}
+                                {{ form.amount.label_tag }}
+                                {{ form.amount }}
+                            {% endif %}
                         </div>
                     </div>
                     <div class="field">
@@ -30,8 +58,17 @@
                     <div class="field">
                         {{ form.captcha }}
                     </div>
-
-                    <button type="submit" class="ui submit button">Submit</button>
+                    {% if form.captcha.errors %}
+                        <div class="ui form warning">
+                            <div class="ui warning message">
+                                <div class="header">Captcha missing</div>
+                                <p>{{ form.captcha.errors }}</p>
+                            </div>
+                        </div>
+                    {% endif %}
+                    <div class="field">
+                        <button type="submit" class="ui submit button">Submit</button>
+                    </div>
                 </form>
             </div>
         {% endif %}
@@ -73,5 +110,4 @@
         </table>
     </div>
 
-    </div>
 {% endblock %}
