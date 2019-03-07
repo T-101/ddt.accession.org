@@ -5,8 +5,14 @@
     <head>
         <meta charset="UTF-8">
         <title>RIP DDT</title>
-        <meta name="theme-color" content="#222222" />
+        <meta name="theme-color" content="#222222"/>
+        <style>
+            .overstrike {
+                text-decoration: line-through;
+            }
+        </style>
     </head>
+
     <link rel="stylesheet" type="text/css" href="{% static 'ddt/css/semantic.cyborg.min.css' %}">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
           integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
@@ -16,13 +22,11 @@
     <div class="ui container">
 
         <!-- <div class="ui three item menu"> -->
-        <div class="ui secondary pointing three item demo menu">
+        <div class="ui secondary pointing two item demo menu">
             <a class="{% if request.resolver_match.url_name == "index" %}active{% endif %} item"
-               href="{% url 'index' %}">Home</a>
+               href="index.html">Home</a>
             <a class="{% if request.resolver_match.url_name == "funeral" %}active{% endif %} item"
-               href="{% url 'funeral' %}">Memorial registration</a>
-            <a class="{% if request.resolver_match.url_name == "wall" %}active{% endif %} item"
-               href="{% url 'wall' %}">Memorial Wall</a>
+               href="funeral.html">Memorial registration</a>
         </div>
 
         {% block content %}
